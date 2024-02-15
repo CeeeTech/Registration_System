@@ -17,3 +17,4 @@ router.get('/:id', getRegistration); // Updated function name
 router.patch('/:id', updateRegistration); // Updated function name
 
 module.exports = router;
+//change
