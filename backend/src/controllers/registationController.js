@@ -28,6 +28,37 @@ const getRegistration = async (req, res) => {
   }
 };
 
+// create a new student
+const createStudent = async (req, res) => {
+  const {first_name,   last_name,   course , email, telephone, address,registration_number, gender} = req.body
+
+  // add to the database
+  try {
+    const create = await Registration.create({   first_name,   last_name,   course , email, telephone, address,registration_number, gender})
+    res.status(200).json(create)
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+}
+
+// delete a registation
+const deleteRegistation = async (req, res) => {
+    const { id } = req.params
+  
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({error: 'No such deleteStudent'})
+    }
+  
+    const deleteStudent = await Registration.findOneAndDelete({_id: id})
+  
+    if(!deleteStudent) {
+      return res.status(400).json({error: 'No such deleteStudent'})
+    }
+  
+    res.status(200).json(deleteStudent)
+  }
+
+
 // Update a registration
 const updateRegistration = async (req, res) => {
   const { id } = req.params;
@@ -46,7 +77,10 @@ const updateRegistration = async (req, res) => {
 };
 
 module.exports = {
+
   getRegistrations,
   getRegistration,
+  createStudent,
+  deleteRegistation,
   updateRegistration
 };

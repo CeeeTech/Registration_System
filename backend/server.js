@@ -2,7 +2,7 @@
 require('dotenv').config()
 
 const express =require ('express')
-const workoutRoutes =require('./routes/registation')
+const registation =require('./src/routes/registation')
 const mongoose = require('mongoose')
 
 // express app
@@ -20,7 +20,7 @@ app.use((req, res, next) => {
   })
 
 // routes
-app.use('/api/registation',workoutRoutes)
+app.use('/api/registation',registation)
 
 
 
